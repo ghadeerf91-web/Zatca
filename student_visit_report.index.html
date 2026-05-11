@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج تقييم الزيارة الطلابية - هيئة الزكاة والضريبة والجمارك</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --zatca-dark: #003d4d;
+    --zatca-teal: #00838f;
+    --zatca-green: #4caf50;
+    --zatca-lime: #8bc34a;
+    --zatca-gradient: linear-gradient(135deg, #003d4d 0%, #00838f 40%, #4caf50 80%, #8bc34a 100%);
+    --zatca-gradient-soft: linear-gradient(135deg, #e0f2f1 0%, #e8f5e9 100%);
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #1a2a3a;
+    --text-light: #5a6a7a;
+    --border: #e0e6ed;
+    --shadow: 0 2px 16px rgba(0,61,77,0.08);
+    --shadow-hover: 0 6px 32px rgba(0,61,77,0.14);
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Header */
+  .header {
+    background: var(--zatca-gradient);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,61,77,0.2);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-circle {
+    width: 56px;
+    height: 56px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+
+  .logo-circle svg { width: 32px; height: 32px; }
+
+  .header-title h1 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .header-title p {
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-header {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: 'Tajawal';
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(4px);
+  }
+
+  .btn-header:hover {
+    background: rgba(255,255,255,0.28);
+    transform: translateY(-1px);
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    background: #fff;
+    padding: 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 96px;
+    z-index: 99;
+  }
+
+  .progress-track {
+    height: 4px;
+    background: #e8ecf0;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--zatca-gradient);
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .progress-steps {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 40px;
+  }
+
+  .progress-step {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: transparent;
+    border: none;
+    font-family: 'Tajawal';
+  }
+
+  .progress-step.active {
+    background: var(--zatca-teal);
+    color: #fff;
+  }
+
+  .progress-step.completed {
+    background: #e0f2f1;
+    color: var(--zatca-teal);
+  }
+
+  .progress-step:hover:not(.active) {
+    background: #f0f4f5;
+  }
+
+  /* Main */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* Sections */
+  .section {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .section:hover { box-shadow: var(--shadow-hover); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(2) { animation-delay: 0.08s; }
+  .section:nth-child(3) { animation-delay: 0.16s; }
+  .section:nth-child(4) { animation-delay: 0.24s; }
+
+  .section-header {
+    background: var(--zatca-gradient-soft);
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--zatca-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--zatca-dark);
+  }
+
+  .section-body { padding: 24px 28px; }
+
+  /* Form Grid */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-grid .full-width { grid-column: 1 / -1; }
+
+  .form-group { position: relative; }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .form-group label .required {
+    color: #e53935;
+    margin-right: 2px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Tajawal';
+    font-size: 14px;
+    color: var(--text);
+    background: #fafbfc;
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--zatca-teal);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0,131,143,0.1);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  /* Rating Group */
+  .rating-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #f0f3f6;
+  }
+
+  .rating-row:last-child { border-bottom: none; }
+
+  .rating-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .rating-options {
+    display: flex;
+    gap: 6px;
+    direction: ltr;
+  }
+
+  .rating-btn {
+    padding: 6px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: #fafbfc;
+    font-family: 'Tajawal';
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .rating-btn:hover {
+    border-color: var(--zatca-teal);
+    color: var(--zatca-teal);
+    background: #e0f7fa;
+  }
+
+  .rating-btn.selected {
+    background: var(--zatca-teal);
+    color: #fff;
+    border-color: var(--zatca-teal);
+    box-shadow: 0 2px 8px rgba(0,131,143,0.25);
+  }
+
+  .rating-btn.selected-high {
+    background: var(--zatca-green);
+    color: #fff;
+    border-color: var(--zatca-green);
+    box-shadow: 0 2px 8px rgba(76,175,80,0.25);
+  }
+
+  /* Level Buttons (مرتفع/متوسط/منخفض) */
+  .level-btn {
+    padding: 6px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: #fafbfc;
+    font-family: 'Tajawal';
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .level-btn:hover {
+    border-color: var(--zatca-teal);
+    background: #e0f7fa;
+  }
+
+  .level-btn.selected {
+    background: var(--zatca-teal);
+    color: #fff;
+    border-color: var(--zatca-teal);
+  }
+
+  /* Toggle */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .toggle-label { font-size: 14px; font-weight: 500; flex: 1; }
+
+  .toggle-options { display: flex; gap: 6px; }
+
+  .toggle-btn {
+    padding: 6px 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: #fafbfc;
+    font-family: 'Tajawal';
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-light);
+  }
+
+  .toggle-btn.selected-yes {
+    background: var(--zatca-green);
+    color: #fff;
+    border-color: var(--zatca-green);
+  }
+
+  .toggle-btn.selected-no {
+    background: #e53935;
+    color: #fff;
+    border-color: #e53935;
+  }
+
+  /* Speaker Card */
+  .speaker-card {
+    background: #fafbfc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .speaker-card .speaker-num {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    background: var(--zatca-gradient);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .add-speaker-btn {
+    width: 100%;
+    padding: 14px;
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    background: transparent;
+    font-family: 'Tajawal';
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--zatca-teal);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .add-speaker-btn:hover {
+    background: #e0f7fa;
+    border-color: var(--zatca-teal);
+  }
+
+  .remove-speaker {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: #ffebee;
+    color: #e53935;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .remove-speaker:hover { background: #e53935; color: #fff; }
+
+  /* Attachments */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafbfc;
+  }
+
+  .upload-zone:hover {
+    border-color: var(--zatca-teal);
+    background: #e0f7fa;
+  }
+
+  .upload-zone .upload-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+    color: var(--zatca-teal);
+  }
+
+  .upload-zone p { font-size: 13px; color: var(--text-light); }
+
+  .file-list { margin-top: 12px; }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #e0f2f1;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: var(--zatca-dark);
+  }
+
+  .file-item .remove-file {
+    margin-right: auto;
+    background: none;
+    border: none;
+    color: #e53935;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  /* Footer Actions */
+  .footer-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    margin-top: 24px;
+  }
+
+  .btn-primary {
+    background: var(--zatca-gradient);
+    color: #fff;
+    padding: 12px 36px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Tajawal';
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 16px rgba(0,131,143,0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0,131,143,0.4);
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: var(--zatca-teal);
+    padding: 12px 28px;
+    border: 1.5px solid var(--zatca-teal);
+    border-radius: 10px;
+    font-family: 'Tajawal';
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: #e0f7fa; }
+
+  /* Success Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    animation: modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .modal .check-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--zatca-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 36px;
+    color: #fff;
+  }
+
+  .modal h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: var(--zatca-dark); }
+  .modal p { font-size: 14px; color: var(--text-light); margin-bottom: 24px; }
+
+  /* Signature */
+  .signature-pad {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: #fafbfc;
+    height: 140px;
+    position: relative;
+    cursor: crosshair;
+    overflow: hidden;
+  }
+
+  .signature-pad canvas { width: 100%; height: 100%; }
+
+  .signature-pad .clear-sig {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-family: 'Tajawal';
+    cursor: pointer;
+    color: var(--text-light);
+  }
+
+  .signature-pad .sig-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #c0c8d0;
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  /* Validation */
+  .form-group.error input,
+  .form-group.error select,
+  .form-group.error textarea {
+    border-color: #e53935;
+    background: #fff5f5;
+  }
+
+  .error-msg {
+    font-size: 11px;
+    color: #e53935;
+    margin-top: 4px;
+    display: none;
+  }
+
+  .form-group.error .error-msg { display: block; }
+
+  /* Print */
+  @media print {
+    .header { position: static; }
+    .progress-bar, .header-actions, .btn-header, .footer-actions,
+    .add-speaker-btn, .remove-speaker, .clear-sig, .upload-zone { display: none !important; }
+    .section { box-shadow: none; break-inside: avoid; border: 1px solid #ddd; }
+    body { background: #fff; }
+    .main { padding: 0; }
+  }
+
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .header { padding: 16px 20px; flex-direction: column; gap: 12px; }
+    .rating-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .main { padding: 16px 12px 60px; }
+    .section-body { padding: 16px; }
+    .progress-steps { padding: 8px 12px; overflow-x: auto; }
+  }
+
+  /* Stamp */
+  .stamp {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .stamp.public {
+    background: #e0f2f1;
+    color: var(--zatca-teal);
+    border: 1px solid #b2dfdb;
+  }
+
+  /* Performance Evaluation Cards */
+  .perf-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .perf-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 12px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: #fafbfc;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    font-family: 'Tajawal';
+    text-align: center;
+  }
+
+  .perf-btn:hover {
+    border-color: var(--zatca-teal);
+    background: #e0f7fa;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,131,143,0.12);
+  }
+
+  .perf-btn .perf-icon { font-size: 32px; }
+
+  .perf-btn .perf-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .perf-btn .perf-desc {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.4;
+  }
+
+  .perf-btn.perf-selected-green {
+    border-color: #2e7d32;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    box-shadow: 0 4px 16px rgba(46,125,50,0.2);
+    transform: translateY(-3px);
+  }
+  .perf-btn.perf-selected-green .perf-label { color: #1b5e20; }
+
+  .perf-btn.perf-selected-blue {
+    border-color: var(--zatca-teal);
+    background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
+    box-shadow: 0 4px 16px rgba(0,131,143,0.2);
+    transform: translateY(-3px);
+  }
+  .perf-btn.perf-selected-blue .perf-label { color: #00695c; }
+
+  .perf-btn.perf-selected-orange {
+    border-color: #e65100;
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    box-shadow: 0 4px 16px rgba(230,81,0,0.15);
+    transform: translateY(-3px);
+  }
+  .perf-btn.perf-selected-orange .perf-label { color: #bf360c; }
+
+  @media (max-width: 640px) {
+    .perf-options { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-right">
+    <div class="logo-circle">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M16 2L4 8v8c0 7.7 5.1 14.9 12 16.9C22.9 30.9 28 23.7 28 16V8L16 2z" fill="rgba(255,255,255,0.3)" stroke="white" stroke-width="1.5"/><path d="M12 16l3 3 5-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="header-title">
+      <h1>نموذج تقييم الزيارة الطلابية</h1>
+      <p>هيئة الزكاة والضريبة والجمارك &nbsp;|&nbsp; Zakat, Tax and Customs Authority</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <span class="stamp public">عام | Public</span>
+    <button class="btn-header" onclick="window.print()">🖨️ طباعة</button>
+    <button class="btn-header" onclick="resetForm()">🔄 مسح</button>
+  </div>
+</div>
+
+<!-- Progress -->
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-steps">
+    <button class="progress-step active" onclick="scrollToSection(0)">المسؤول عن الزيارة</button>
+    <button class="progress-step" onclick="scrollToSection(1)">نبذة عامة</button>
+    <button class="progress-step" onclick="scrollToSection(2)">بيانات الزيارة</button>
+    <button class="progress-step" onclick="scrollToSection(3)">تقييم المتحدثين</button>
+    <button class="progress-step" onclick="scrollToSection(4)">إجراءات الدخول</button>
+    <button class="progress-step" onclick="scrollToSection(5)">تقييم المسؤول</button>
+    <button class="progress-step" onclick="scrollToSection(6)">التحسينات</button>
+    <button class="progress-step" onclick="scrollToSection(7)">التوقيع</button>
+  </div>
+</div>
+
+<div class="main" id="mainContent">
+
+  <!-- Section 1: المسؤول عن الزيارة -->
+  <div class="section" data-section="0">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <h2>المسؤول عن الزيارة</h2>
+    </div>
+    <div class="section-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label><span class="required">*</span> اسم الموظف</label>
+          <input type="text" id="empName" placeholder="أدخل اسم الموظف" required>
+          <div class="error-msg">يرجى إدخال اسم الموظف</div>
+        </div>
+        <div class="form-group">
+          <label>الإدارة / القسم</label>
+          <input type="text" id="empDept" placeholder="أدخل اسم الإدارة">
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="empEmail" placeholder="example@zatca.gov.sa">
+        </div>
+        <div class="form-group">
+          <label>رقم الجوال</label>
+          <input type="tel" id="empPhone" placeholder="05XXXXXXXX">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: نبذة عامة -->
+  <div class="section" data-section="1">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <h2>نبذة عامة عن الزيارة</h2>
+    </div>
+    <div class="section-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label><span class="required">*</span> اسم الجامعة / الجهة التعليمية</label>
+          <input type="text" id="uniName" placeholder="أدخل اسم الجامعة" required>
+          <div class="error-msg">يرجى إدخال اسم الجامعة</div>
+        </div>
+        <div class="form-group">
+          <label><span class="required">*</span> الكلية / النادي</label>
+          <input type="text" id="collegeName" placeholder="أدخل اسم الكلية أو النادي" required>
+          <div class="error-msg">يرجى إدخال اسم الكلية</div>
+        </div>
+        <div class="form-group">
+          <label><span class="required">*</span> التاريخ</label>
+          <input type="date" id="visitDate" required>
+          <div class="error-msg">يرجى تحديد التاريخ</div>
+        </div>
+        <div class="form-group">
+          <label>عدد الحضور (طلاب/طالبات)</label>
+          <input type="number" id="attendeeCount" placeholder="مثال: 25" min="1">
+        </div>
+        <div class="form-group">
+          <label><span class="required">*</span> الوقت</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="time" id="timeFrom" style="flex:1" required>
+            <span style="color:var(--text-light)">–</span>
+            <input type="time" id="timeTo" style="flex:1" required>
+          </div>
+          <div class="error-msg">يرجى تحديد الوقت</div>
+        </div>
+        <div class="form-group">
+          <label><span class="required">*</span> الموقع</label>
+          <input type="text" id="location" placeholder="مثال: الصحافة – مبنى صميم – الطابق السابع" required>
+          <div class="error-msg">يرجى إدخال الموقع</div>
+        </div>
+        <div class="form-group full-width">
+          <label><span class="required">*</span> الهدف من الزيارة</label>
+          <textarea id="visitObjective" placeholder="اذكر أهداف الزيارة بشكل واضح..." required></textarea>
+          <div class="error-msg">يرجى إدخال الهدف من الزيارة</div>
+        </div>
+        <div class="form-group full-width">
+          <label>القطاعات / الوكالات المشاركة من الهيئة</label>
+          <input type="text" id="sectors" placeholder="مثال: التواصل المؤسسي – أكاديمية الهيئة">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: بيانات الزيارة -->
+  <div class="section" data-section="2">
+    <div class="section-header">
+      <div class="section-icon">📊</div>
+      <h2>بيانات الزيارة</h2>
+    </div>
+    <div class="section-body">
+      <div class="rating-row">
+        <span class="rating-label">الالتزام بالوقت</span>
+        <div class="rating-options" data-rating="timeCommit">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">الالتزام بالزي الرسمي</span>
+        <div class="rating-options" data-rating="dressCode">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">مدى تفاعل الحضور أثناء الزيارة</span>
+        <div class="rating-options" data-rating="engagement">
+          <button class="level-btn" data-value="مرتفع" onclick="selectRating(this)">مرتفع</button>
+          <button class="level-btn" data-value="متوسط" onclick="selectRating(this)">متوسط</button>
+          <button class="level-btn" data-value="منخفض" onclick="selectRating(this)">منخفض</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">تقييم تحقيق الفائدة (بناءً على آراء الطلاب)</span>
+        <div class="rating-options" data-rating="benefit">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">التغطية الإعلامية</span>
+        <div class="toggle-options" data-toggle="mediaCoverage">
+          <button class="toggle-btn" data-value="yes" onclick="selectToggle(this, 'yes')">يوجد</button>
+          <button class="toggle-btn" data-value="no" onclick="selectToggle(this, 'no')">لا يوجد</button>
+        </div>
+      </div>
+      <div class="form-group full-width" style="margin-top: 16px;">
+        <label>أبرز الملاحظات</label>
+        <textarea id="visitNotes" placeholder="اذكر أبرز الملاحظات على الزيارة..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: تقييم المتحدثين -->
+  <div class="section" data-section="3">
+    <div class="section-header">
+      <div class="section-icon">🎤</div>
+      <h2>تقييم المتحدثين / المقدمين</h2>
+    </div>
+    <div class="section-body">
+      <div id="speakersContainer">
+        <!-- Speaker 1 -->
+        <div class="speaker-card" data-speaker="1">
+          <div class="speaker-num">1</div>
+          <div class="form-grid" style="margin-bottom:16px;">
+            <div class="form-group">
+              <label>اسم المتحدث</label>
+              <input type="text" placeholder="أدخل اسم المتحدث">
+            </div>
+            <div class="form-group">
+              <label>القطاع / الوكالة</label>
+              <input type="text" placeholder="أدخل القطاع أو الوكالة">
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="rating-label">الالتزام بالوقت</span>
+            <div class="rating-options" data-rating="sp1_time">
+              <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+              <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+              <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+              <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="rating-label">الالتزام بالزي الرسمي</span>
+            <div class="rating-options" data-rating="sp1_dress">
+              <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+              <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+              <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+              <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="rating-label">القدرة على إيصال المعلومة</span>
+            <div class="rating-options" data-rating="sp1_delivery">
+              <button class="level-btn" data-value="مرتفع" onclick="selectRating(this)">مرتفع</button>
+              <button class="level-btn" data-value="متوسط" onclick="selectRating(this)">متوسط</button>
+              <button class="level-btn" data-value="منخفض" onclick="selectRating(this)">منخفض</button>
+            </div>
+          </div>
+          <div class="rating-row">
+            <span class="rating-label">التفاعل مع الحضور والإجابة على استفسارات الطلبة</span>
+            <div class="rating-options" data-rating="sp1_interact">
+              <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+              <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+              <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+              <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:12px;">
+            <label>أبرز الملاحظات</label>
+            <textarea placeholder="ملاحظات على أداء المتحدث..."></textarea>
+          </div>
+        </div>
+      </div>
+      <button class="add-speaker-btn" onclick="addSpeaker()">
+        <span style="font-size:20px;">+</span> إضافة متحدث جديد
+      </button>
+    </div>
+  </div>
+
+  <!-- Section 5: إجراءات الدخول -->
+  <div class="section" data-section="4">
+    <div class="section-header">
+      <div class="section-icon">🔐</div>
+      <h2>إجراءات الدخول والتنظيم</h2>
+    </div>
+    <div class="section-body">
+      <div class="toggle-row">
+        <span class="toggle-label">تم إصدار تصاريح دخول للزوار</span>
+        <div class="toggle-options" data-toggle="permits">
+          <button class="toggle-btn" data-value="yes" onclick="selectToggle(this, 'yes')">نعم</button>
+          <button class="toggle-btn" data-value="no" onclick="selectToggle(this, 'no')">لا</button>
+        </div>
+      </div>
+      <div class="form-group" style="margin: 16px 0;">
+        <label>آلية الدخول</label>
+        <input type="text" id="entryMethod" placeholder="مثال: استلام بطاقات الدخول من الأمن">
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">مدى انسيابية إجراءات الدخول</span>
+        <div class="rating-options" data-rating="entryFlow">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top: 16px;">
+        <label>ملاحظات على التنظيم الأمني</label>
+        <textarea id="securityNotes" placeholder="اذكر أي ملاحظات أمنية..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 6: تقييم أداء المسؤول عن الزيارة -->
+  <div class="section" data-section="5">
+    <div class="section-header">
+      <div class="section-icon">⭐</div>
+      <h2>تقييم أداء المسؤول عن الزيارة</h2>
+    </div>
+    <div class="section-body">
+      <div style="background:linear-gradient(135deg,#fff8e1,#fff3e0);border:1px solid #ffe0b2;border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:20px;">🔒</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#e65100;">يُعبّأ من قِبل مدير الإدارة</div>
+          <div style="font-size:12px;color:#bf360c;margin-top:2px;">هذا القسم مخصص لتقييم مدير الإدارة لأداء الموظف المسؤول عن تنظيم الزيارة</div>
+        </div>
+      </div>
+      <div style="margin-top:4px;">
+        <label style="font-size:14px;font-weight:600;display:block;margin-bottom:12px;">التقييم العام لأداء المسؤول عن الزيارة</label>
+        <div class="perf-options" id="perfOptions">
+          <button class="perf-btn" data-value="فاق التوقعات" onclick="selectPerf(this)">
+            <span class="perf-icon">🌟</span>
+            <span class="perf-label">فاق التوقعات</span>
+            <span class="perf-desc">أداء متميز يتجاوز المطلوب</span>
+          </button>
+          <button class="perf-btn" data-value="حقق الأهداف" onclick="selectPerf(this)">
+            <span class="perf-icon">✅</span>
+            <span class="perf-label">حقق الأهداف</span>
+            <span class="perf-desc">أداء جيد يحقق المتطلبات</span>
+          </button>
+          <button class="perf-btn" data-value="أقل من المتوقع" onclick="selectPerf(this)">
+            <span class="perf-icon">⚠️</span>
+            <span class="perf-label">أقل من المتوقع</span>
+            <span class="perf-desc">يحتاج إلى تحسين وتطوير</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:20px;">
+        <label>ملاحظات مدير الإدارة</label>
+        <textarea id="managerNotes" placeholder="أضف أي ملاحظات أو توصيات بشأن أداء المسؤول عن الزيارة..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 7: التحسينات -->
+  <div class="section" data-section="6">
+    <div class="section-header">
+      <div class="section-icon">💡</div>
+      <h2>أبرز التحديات والتحسينات المستقبلية</h2>
+    </div>
+    <div class="section-body">
+      <div id="challengesContainer">
+        <div class="form-group" style="margin-bottom:12px;">
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" placeholder="أدخل التحدي أو التحسين المقترح..." style="flex:1">
+            <button onclick="addChallenge()" style="background:var(--zatca-teal);color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer;font-family:'Tajawal';font-weight:600;font-size:13px;white-space:nowrap;">+ إضافة</button>
+          </div>
+        </div>
+      </div>
+      <div id="challengesList"></div>
+    </div>
+  </div>
+
+  <!-- Section 8: المرفقات والتوقيع -->
+  <div class="section" data-section="7">
+    <div class="section-header">
+      <div class="section-icon">✍️</div>
+      <h2>المرفقات والتوقيع</h2>
+    </div>
+    <div class="section-body">
+      <label style="font-size:13px;font-weight:600;margin-bottom:8px;display:block;">المرفقات</label>
+      <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-icon">📎</div>
+        <p>اضغط هنا لإرفاق الملفات<br><span style="font-size:11px;color:#aaa;">قائمة الحضور، صور الزيارة، نسخة من العرض التقديمي</span></p>
+      </div>
+      <input type="file" id="fileInput" multiple hidden onchange="handleFiles(this.files)">
+      <div class="file-list" id="fileList"></div>
+
+      <div class="form-group" style="margin-top: 24px;">
+        <label>تعليقات إضافية</label>
+        <textarea id="additionalComments" placeholder="أي تعليقات أو ملاحظات إضافية..."></textarea>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <label style="font-size:13px;font-weight:600;margin-bottom:8px;display:block;">التوقيع</label>
+        <div class="signature-pad" id="sigPad">
+          <canvas id="sigCanvas"></canvas>
+          <span class="sig-placeholder" id="sigPlaceholder">وقّع هنا</span>
+          <button class="clear-sig" onclick="clearSignature()">مسح</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-actions">
+    <button class="btn-primary" onclick="submitForm()">
+      ✅ إرسال التقرير
+    </button>
+    <button class="btn-secondary" onclick="window.print()">
+      🖨️ طباعة التقرير
+    </button>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="check-circle">✓</div>
+    <h3>تم إرسال التقرير بنجاح</h3>
+    <p>تم حفظ نموذج تقييم الزيارة الطلابية بنجاح. شكراً لك!</p>
+    <button class="btn-primary" style="margin:0 auto;" onclick="closeModal()">حسناً</button>
+  </div>
+</div>
+
+<script>
+  // Rating selection
+  function selectRating(btn) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.rating-btn, .level-btn').forEach(b => {
+      b.classList.remove('selected', 'selected-high');
+    });
+    const isLevel = btn.classList.contains('level-btn');
+    btn.classList.add(isLevel ? 'selected' : 'selected');
+    updateProgress();
+  }
+
+  // Performance evaluation selection
+  function selectPerf(btn) {
+    document.querySelectorAll('.perf-btn').forEach(b => {
+      b.classList.remove('perf-selected-green', 'perf-selected-blue', 'perf-selected-orange');
+    });
+    const val = btn.getAttribute('data-value');
+    if (val === 'فاق التوقعات') btn.classList.add('perf-selected-green');
+    else if (val === 'حقق الأهداف') btn.classList.add('perf-selected-blue');
+    else btn.classList.add('perf-selected-orange');
+    updateProgress();
+  }
+
+  // Toggle selection
+  function selectToggle(btn, value) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.toggle-btn').forEach(b => {
+      b.classList.remove('selected-yes', 'selected-no');
+    });
+    btn.classList.add(value === 'yes' ? 'selected-yes' : 'selected-no');
+    updateProgress();
+  }
+
+  // Speaker management
+  let speakerCount = 1;
+  function addSpeaker() {
+    speakerCount++;
+    const container = document.getElementById('speakersContainer');
+    const card = document.createElement('div');
+    card.className = 'speaker-card';
+    card.setAttribute('data-speaker', speakerCount);
+    card.innerHTML = `
+      <div class="speaker-num">${speakerCount}</div>
+      <button class="remove-speaker" onclick="removeSpeaker(this)">✕</button>
+      <div class="form-grid" style="margin-bottom:16px;">
+        <div class="form-group">
+          <label>اسم المتحدث</label>
+          <input type="text" placeholder="أدخل اسم المتحدث">
+        </div>
+        <div class="form-group">
+          <label>القطاع / الوكالة</label>
+          <input type="text" placeholder="أدخل القطاع أو الوكالة">
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">الالتزام بالوقت</span>
+        <div class="rating-options" data-rating="sp${speakerCount}_time">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">الالتزام بالزي الرسمي</span>
+        <div class="rating-options" data-rating="sp${speakerCount}_dress">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">القدرة على إيصال المعلومة</span>
+        <div class="rating-options" data-rating="sp${speakerCount}_delivery">
+          <button class="level-btn" data-value="مرتفع" onclick="selectRating(this)">مرتفع</button>
+          <button class="level-btn" data-value="متوسط" onclick="selectRating(this)">متوسط</button>
+          <button class="level-btn" data-value="منخفض" onclick="selectRating(this)">منخفض</button>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">التفاعل مع الحضور والإجابة على استفسارات الطلبة</span>
+        <div class="rating-options" data-rating="sp${speakerCount}_interact">
+          <button class="rating-btn" data-value="ممتاز" onclick="selectRating(this)">ممتاز</button>
+          <button class="rating-btn" data-value="جيد جداً" onclick="selectRating(this)">جيد جداً</button>
+          <button class="rating-btn" data-value="جيد" onclick="selectRating(this)">جيد</button>
+          <button class="rating-btn" data-value="مقبول" onclick="selectRating(this)">مقبول</button>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:12px;">
+        <label>أبرز الملاحظات</label>
+        <textarea placeholder="ملاحظات على أداء المتحدث..."></textarea>
+      </div>
+    `;
+    container.appendChild(card);
+    card.style.animation = 'fadeUp 0.4s ease both';
+  }
+
+  function removeSpeaker(btn) {
+    const card = btn.closest('.speaker-card');
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(-10px)';
+    card.style.transition = 'all 0.3s';
+    setTimeout(() => {
+      card.remove();
+      renumberSpeakers();
+    }, 300);
+  }
+
+  function renumberSpeakers() {
+    document.querySelectorAll('.speaker-card').forEach((card, i) => {
+      card.querySelector('.speaker-num').textContent = i + 1;
+    });
+    speakerCount = document.querySelectorAll('.speaker-card').length;
+  }
+
+  // Challenges
+  function addChallenge() {
+    const container = document.getElementById('challengesContainer');
+    const input = container.querySelector('input');
+    const val = input.value.trim();
+    if (!val) return;
+    const list = document.getElementById('challengesList');
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `<span>💡</span> ${val} <button class="remove-file" onclick="this.parentElement.remove(); updateProgress();">✕</button>`;
+    list.appendChild(item);
+    input.value = '';
+    updateProgress();
+  }
+
+  // File handling
+  function handleFiles(files) {
+    const list = document.getElementById('fileList');
+    for (const f of files) {
+      const item = document.createElement('div');
+      item.className = 'file-item';
+      const icon = f.type.startsWith('image') ? '🖼️' : '📄';
+      item.innerHTML = `<span>${icon}</span> ${f.name} <button class="remove-file" onclick="this.parentElement.remove()">✕</button>`;
+      list.appendChild(item);
+    }
+  }
+
+  // Signature
+  const canvas = document.getElementById('sigCanvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  let hasSigned = false;
+
+  function initCanvas() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    ctx.strokeStyle = '#1a2a3a';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  }
+
+  canvas.addEventListener('pointerdown', e => {
+    drawing = true;
+    hasSigned = true;
+    document.getElementById('sigPlaceholder').style.display = 'none';
+    ctx.beginPath();
+    const rect = canvas.getBoundingClientRect();
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+  });
+
+  canvas.addEventListener('pointermove', e => {
+    if (!drawing) return;
+    const rect = canvas.getBoundingClientRect();
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.stroke();
+  });
+
+  canvas.addEventListener('pointerup', () => { drawing = false; updateProgress(); });
+  canvas.addEventListener('pointerleave', () => { drawing = false; });
+
+  function clearSignature() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hasSigned = false;
+    document.getElementById('sigPlaceholder').style.display = '';
+    updateProgress();
+  }
+
+  // Progress tracking
+  function updateProgress() {
+    const fields = document.querySelectorAll('#mainContent input[required], #mainContent textarea[required]');
+    let filled = 0;
+    let total = fields.length + 5; // +5 for ratings and toggles and signature
+
+    fields.forEach(f => { if (f.value.trim()) filled++; });
+
+    const ratings = document.querySelectorAll('.rating-options');
+    ratings.forEach(r => {
+      const selected = r.querySelector('.selected, .selected-high');
+      if (selected) filled++;
+    });
+    total += ratings.length - 5;
+
+    if (hasSigned) filled++;
+
+    const pct = Math.min(100, Math.round((filled / total) * 100));
+    document.getElementById('progressFill').style.width = pct + '%';
+
+    // Update step indicators
+    const steps = document.querySelectorAll('.progress-step');
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((sec, i) => {
+      const inputs = sec.querySelectorAll('input, textarea, select');
+      const selectedBtns = sec.querySelectorAll('.selected, .selected-high, .selected-yes, .selected-no');
+      let hasContent = false;
+      inputs.forEach(inp => { if (inp.value.trim()) hasContent = true; });
+      if (selectedBtns.length > 0) hasContent = true;
+      if (hasContent && steps[i]) {
+        steps[i].classList.add('completed');
+      }
+    });
+  }
+
+  function scrollToSection(index) {
+    const sections = document.querySelectorAll('.section');
+    if (sections[index]) {
+      sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.progress-step').forEach((s, i) => {
+        s.classList.toggle('active', i === index);
+      });
+    }
+  }
+
+  // Form validation & submit
+  function submitForm() {
+    let valid = true;
+    document.querySelectorAll('.form-group.error').forEach(g => g.classList.remove('error'));
+
+    document.querySelectorAll('#mainContent input[required], #mainContent textarea[required]').forEach(f => {
+      if (!f.value.trim()) {
+        f.closest('.form-group').classList.add('error');
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      const firstError = document.querySelector('.form-group.error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    document.getElementById('successModal').classList.add('show');
+  }
+
+  function closeModal() {
+    document.getElementById('successModal').classList.remove('show');
+  }
+
+  function resetForm() {
+    if (!confirm('هل أنت متأكد من مسح جميع البيانات؟')) return;
+    document.querySelectorAll('input, textarea').forEach(f => f.value = '');
+    document.querySelectorAll('.selected, .selected-high, .selected-yes, .selected-no').forEach(b => {
+      b.classList.remove('selected', 'selected-high', 'selected-yes', 'selected-no');
+    });
+    document.querySelectorAll('.perf-btn').forEach(b => {
+      b.classList.remove('perf-selected-green', 'perf-selected-blue', 'perf-selected-orange');
+    });
+    document.getElementById('fileList').innerHTML = '';
+    document.getElementById('challengesList').innerHTML = '';
+    clearSignature();
+    document.getElementById('progressFill').style.width = '0%';
+    document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('completed'));
+    document.querySelectorAll('.form-group.error').forEach(g => g.classList.remove('error'));
+  }
+
+  // Input listeners for progress
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input', updateProgress);
+  });
+
+  // Scroll spy
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = parseInt(entry.target.getAttribute('data-section'));
+        document.querySelectorAll('.progress-step').forEach((s, i) => {
+          s.classList.toggle('active', i === idx);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+
+  document.querySelectorAll('.section').forEach(sec => observer.observe(sec));
+
+  // Init
+  window.addEventListener('load', () => {
+    initCanvas();
+    updateProgress();
+  });
+
+  window.addEventListener('resize', initCanvas);
+</script>
+</body>
+</html>
